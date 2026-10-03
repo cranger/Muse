@@ -5,41 +5,119 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy — cranger muse</title>
 <style>
-  body { font-family: -apple-system, system-ui, sans-serif; max-width: 640px; margin: 48px auto; padding: 0 20px; color: #222; line-height: 1.6; }
+  body { font-family: -apple-system, system-ui, sans-serif; max-width: 680px; margin: 48px auto; padding: 0 20px; color: #222; line-height: 1.65; }
   h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; }
   a { color: #1a73e8; }
+  code { background: #f1f3f4; padding: 1px 5px; border-radius: 4px; font-size: 14px; }
 </style>
 </head>
 <body>
 <h1>Privacy Policy</h1>
 <p>Last updated: October 2, 2026</p>
-<p><strong>cranger muse</strong> is a personal automation built for a single
-user. This policy describes how it handles Google user data.</p>
-<h2>Data accessed</h2>
-<p>The app accesses the owner's Google Chat data through the Google Chat API,
-using the following scopes: reading chat spaces, messages, memberships, and
-message reactions, plus basic profile information. Access is granted by the
-owner through Google's OAuth consent screen.</p>
-<h2>How data is used</h2>
-<p>Chat data is used solely to surface reminders, direct questions, and
-time-sensitive updates to the owner. The app does not send messages, modify
-chats, or take any other action without the owner's explicit instruction.</p>
-<h2>Data storage and sharing</h2>
+
+<h2>1. Introduction</h2>
+<p><strong>cranger muse</strong> ("the app") is a personal automation built and
+operated by a single individual for their own use. It connects a private AI
+assistant to the owner's Google Chat account so the assistant can surface
+reminders, direct questions, and time-sensitive updates from the owner's chats.
+The app is not offered as a service to anyone else, has no other users, and
+collects data from exactly one Google account: the owner's.</p>
+<p>This policy explains what Google user data the app accesses, why it accesses
+it, and how that data is handled, stored, and protected.</p>
+
+<h2>2. Data we collect</h2>
+<p>The app accesses the owner's Google Chat data exclusively through the
+official Google Chat API, after the owner grants permission on Google's OAuth
+consent screen. The app requests the following OAuth scopes, and accesses only
+the data those scopes permit:</p>
 <ul>
-  <li>OAuth tokens are stored on the owner's private home server and are never
-  shared with any third party.</li>
-  <li>Message content is processed in memory to produce summaries for the owner
-  and is not sold, rented, or disclosed to anyone else.</li>
-  <li>No analytics, advertising, or tracking is performed.</li>
+  <li><code>chat.spaces</code> — the list of the owner's chat spaces (direct
+  messages and group spaces), including space names and membership rosters, so
+  the app knows which conversations to check.</li>
+  <li><code>chat.messages</code> — the text content, timestamps, and sender
+  information of messages in the owner's spaces, so the assistant can identify
+  reminders, questions, and time-sensitive updates addressed to the owner.</li>
+  <li><code>chat.memberships</code> — membership details of the owner's spaces,
+  used to understand who participates in each conversation.</li>
+  <li><code>chat.messages.reactions</code> — emoji reactions on messages, used
+  only as additional context when summarizing a conversation.</li>
+  <li><code>directory.readonly</code> — basic directory information, used to
+  resolve the display names of message senders.</li>
+  <li><code>userinfo.profile</code> — the owner's basic profile information
+  (name and profile photo), used to identify the owner's own messages so they
+  can be excluded from alerts.</li>
 </ul>
-<h2>Data retention and deletion</h2>
-<p>The owner may revoke the app's access at any time from their
-<a href="https://myaccount.google.com/permissions">Google account permissions
-page</a>. Revoking access immediately stops all data collection; stored tokens
-can be deleted from the home server on request.</p>
-<h2>Contact</h2>
+<p>The app does <strong>not</strong> access Gmail, Google Drive, Google
+Calendar, or any other Google service. It does not collect location data,
+contacts outside of chat memberships, or any data from any person other than
+through the owner's own chat spaces.</p>
+
+<h2>3. How we use the data</h2>
+<p>Data accessed through the API is used for a single purpose: to help the
+owner stay on top of their Google Chat conversations. Concretely, the app:</p>
+<ul>
+  <li>Periodically reads recent messages in the owner's spaces.</li>
+  <li>Identifies messages that contain reminders, direct questions, requests,
+  or time-sensitive information (for example, family logistics or school
+  updates).</li>
+  <li>Presents concise summaries of those items to the owner through their
+  private assistant.</li>
+</ul>
+<p>The app operates read-only by default: it never sends messages, creates
+spaces, modifies memberships, or takes any other write action unless the owner
+explicitly instructs it to in a given moment. Message content is processed
+transiently in memory to produce summaries; the app does not build profiles,
+train models, or perform analytics on the data.</p>
+
+<h2>4. Data storage and security</h2>
+<ul>
+  <li><strong>OAuth tokens.</strong> The OAuth access and refresh tokens that
+  authorize API access are stored on the owner's private home server, in files
+  readable only by the owner's user account. They are never transmitted
+  anywhere except to Google's OAuth and API endpoints.</li>
+  <li><strong>Message content.</strong> Chat messages are fetched on demand and
+  held in memory only for the duration of processing. The app keeps small
+  operational watermarks (such as the timestamp of the last message checked in
+  each space) so it does not re-read the same messages; it does not maintain a
+  persistent archive of message contents.</li>
+  <li><strong>Security practices.</strong> API communication uses TLS-encrypted
+  HTTPS connections to Google's servers. The home server is on the owner's
+  private network and is not exposed to the public internet.</li>
+</ul>
+
+<h2>5. Data sharing</h2>
+<p>The app does not sell, rent, or share Google user data with any third party.
+Data is disclosed only as follows:</p>
+<ul>
+  <li>To Google's API servers, as required to make the authorized API calls
+  described above.</li>
+  <li>If required by law, in which case disclosure is limited to what is
+  legally compelled.</li>
+</ul>
+<p>There are no advertisers, analytics providers, data brokers, or other third
+parties with access to the data.</p>
+
+<h2>6. Data retention and deletion</h2>
+<p>Operational watermarks (per-space timestamps) are retained until the owner
+deletes them or decommissions the app. OAuth tokens persist until the owner
+revokes access or deletes them.</p>
+<p>The owner can stop all data collection at any time by revoking the app's
+access on the <a href="https://myaccount.google.com/permissions">Google
+account permissions page</a>. Revocation takes effect immediately: the app can
+no longer call the API, and any stored tokens become useless. To delete stored
+tokens and watermarks from the home server, the owner may delete the app's
+credential files directly.</p>
+
+<h2>7. Changes to this policy</h2>
+<p>If this policy changes materially, the "Last updated" date above will be
+revised. Because the app has a single user — its owner and operator — changes
+are made solely at the owner's discretion.</p>
+
+<h2>8. Contact</h2>
 <p>Questions about this policy can be directed to the app owner through the
 Google Cloud project associated with this app.</p>
+
 <p><a href="index.html">Back to home</a></p>
 </body>
 </html>

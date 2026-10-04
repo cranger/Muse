@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — web-assistant</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; max-width: 680px; margin: 48px auto; padding: 0 20px; color: #222; line-height: 1.65; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; }
+  a { color: #1a73e8; }
+  code { background: #f1f3f4; padding: 1px 5px; border-radius: 4px; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>Privacy Policy</h1>
+<p>Last updated: October 4, 2026</p>
+
+<h2>1. Introduction</h2>
+<p><strong>web-assistant</strong> ("the app") is a personal web dashboard built
+and operated by a single individual for their own use. It runs on the owner's
+home server and connects to the owner's Google account so the owner can triage
+email, view their calendar agenda, and manage tasks from one place. The app is
+not offered as a service to anyone else, has no other users, and collects data
+from exactly one Google account: the owner's.</p>
+<p>This policy explains what Google user data the app accesses, why it accesses
+it, and how that data is handled, stored, and protected.</p>
+
+<h2>2. Data we collect</h2>
+<p>The app accesses the owner's Google data exclusively through Google's
+official APIs, after the owner grants permission on Google's OAuth consent
+screen. The app requests the following OAuth scopes, and accesses only the
+data those scopes permit:</p>
+<ul>
+  <li><code>gmail.modify</code> — read the owner's messages (metadata and
+  bodies) so the dashboard can display, categorize, and summarize inbox
+  threads; modify message labels to archive, mark as spam, or star messages
+  when the owner acts on them; and send email replies the owner composes in
+  the dashboard. The app does not access Gmail settings.</li>
+  <li><code>calendar.events</code> — read events across the owner's calendars
+  to render the agenda views, and create, edit, or delete events when the
+  owner adds or changes them in the dashboard.</li>
+  <li><code>tasks</code> — read the owner's task lists and create, complete,
+  or delete tasks the owner manages in the dashboard.</li>
+  <li><code>spreadsheets</code> — read values from the owner's spreadsheets,
+  executed through the owner's own Apps Script, to power the dashboard's stock
+  ticker (quote data the script reads from the owner's sheet).</li>
+</ul>
+<p>The app does <strong>not</strong> access Google Drive files, Google Contacts,
+Google Photos, or any other Google service. It does not collect location data,
+and it does not collect data from anyone other than through the owner's own
+account.</p>
+
+<h2>3. How we use the data</h2>
+<p>Data accessed through the APIs is used for a single purpose: to run the
+owner's personal dashboard. Concretely, the app:</p>
+<ul>
+  <li>Lists and displays the owner's inbox threads, including message content,
+  so they can be read and triaged.</li>
+  <li>Categorizes messages and generates short thread summaries using an AI
+  model (see below), so the owner can scan the inbox quickly.</li>
+  <li>Applies the owner's own archive, spam, star, and reply actions to Gmail.</li>
+  <li>Renders today's and upcoming calendar events and the owner's task lists,
+  and records the task and calendar changes the owner makes.</li>
+  <li>Fetches the owner's spreadsheet-backed stock data through the owner's
+  Apps Script for the dashboard ticker.</li>
+</ul>
+
+<h3>AI and machine learning</h3>
+<p>Email text (subjects, bodies, and generated summaries) is sent to the
+Ollama hosted model API solely to provide the user-facing categorization and
+summarization features described above. The data is processed transiently for
+that request; Google user data accessed through the APIs is <strong>not</strong>
+used to develop, improve, or train generalized (non-personalized) AI or machine
+learning models.</p>
+
+<h2>4. Data storage and security</h2>
+<ul>
+  <li><strong>OAuth tokens.</strong> The OAuth access and refresh tokens that
+  authorize API access are stored in the app's database on the owner's home
+  server, accessible only to the owner's user account. They are never
+  transmitted anywhere except to Google's OAuth and API endpoints.</li>
+  <li><strong>Cached content.</strong> The dashboard caches summaries and
+  metadata (such as message categories, thread summaries, and per-space
+  watermarks) in its database so it does not re-process the same content; these
+  caches are refreshed as new mail arrives and can be cleared by the owner.</li>
+  <li><strong>Security practices.</strong> API communication uses TLS-encrypted
+  HTTPS connections to Google's and Ollama's servers. The home server is on
+  the owner's private network and is not exposed to the public internet.</li>
+</ul>
+
+<h2>5. Data sharing</h2>
+<p>The app does not sell, rent, or share Google user data with any third party.
+Data is disclosed only as follows:</p>
+<ul>
+  <li>To Google's API servers, as required to make the authorized API calls
+  described above.</li>
+  <li>To the Ollama hosted model API, for the transient categorization and
+  summarization processing described in section 3.</li>
+  <li>If required by law, in which case disclosure is limited to what is
+  legally compelled.</li>
+</ul>
+<p>There are no advertisers, analytics providers, data brokers, or other third
+parties with access to the data.</p>
+
+<h2>6. Data retention and deletion</h2>
+<p>Cached summaries and metadata are retained until refreshed, cleared by the
+owner, or the app is decommissioned. OAuth tokens persist until the owner
+revokes access or deletes them.</p>
+<p>The owner can stop all data collection at any time by revoking the app's
+access on the <a href="https://myaccount.google.com/permissions">Google
+account permissions page</a>. Revocation takes effect immediately: the app can
+no longer call the APIs, and any stored tokens become useless. To delete stored
+tokens and cached data from the home server, the owner may delete the app's
+credential files and database records directly.</p>
+
+<h2>7. Changes to this policy</h2>
+<p>If this policy changes materially, the "Last updated" date above will be
+revised. Because the app has a single user — its owner and operator — changes
+are made solely at the owner's discretion.</p>
+
+<h2>8. Contact</h2>
+<p>Questions about this policy can be directed to the app owner through the
+Google Cloud project associated with this app.</p>
+
+<p><a href="index.html">Back to home</a></p>
+</body>
+</html>
